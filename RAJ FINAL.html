@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HBD RAJAT | Version 2026.0</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+
+        :root {
+
+            --pastel-pink: #ffeef2;
+
+            --pastel-blue: #e3f2fd;
+
+            --pastel-purple: #f3e5f5;
+
+            --accent: #ff85a1;
+
+            --glass: rgba(255, 255, 255, 0.8);
+
+        }
+
+
+
+        body, html {
+
+            margin: 0; padding: 0;
+
+            font-family: 'Quicksand', sans-serif;
+
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-purple), var(--pastel-blue));
+
+            color: #444; overflow: hidden; height: 100vh;
+
+        }
+
+
+
+        .overlay {
+
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+
+            display: none; flex-direction: column; align-items: center;
+
+            justify-content: center; text-align: center; z-index: 10;
+
+        }
+
+
+
+        .active { display: flex; animation: slideIn 0.5s ease-out; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+
+
+        .card {
+
+            background: var(--glass); backdrop-filter: blur(15px);
+
+            padding: 35px; border-radius: 35px; border: 2px solid white;
+
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+
+            max-width: 550px; width: 85%; position: relative;
+
+        }
+
+
+
+        h1 { font-family: 'Fredoka', cursive; color: var(--accent); font-size: 2.2rem; }
+
+        .joke-text { font-style: italic; color: #888; margin-bottom: 20px; font-size: 0.9rem; }
+
+
+
+        .btn {
+
+            background: var(--accent); color: white; border: none;
+
+            padding: 12px 25px; border-radius: 50px; font-size: 1rem;
+
+            cursor: pointer; margin: 8px; transition: 0.3s;
+
+            font-weight: bold; font-family: 'Fredoka';
+
+        }
+
+        .btn:hover { transform: scale(1.05); background: #ff6b8e; }
+
+
+
+        .code-box {
+
+            background: #282c34; color: #98c379; padding: 15px;
+
+            border-radius: 15px; text-align: left; font-family: 'Courier New', monospace;
+
+            margin: 15px 0; font-size: 0.9rem; border-left: 5px solid var(--accent);
+
+        }
+
+
+
+        #meter-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 10px; transition: 0.1s; }
+
+        .bug { position: absolute; cursor: pointer; font-size: 2.5rem; transition: 0.2s; }
+
+        
+
+        .progress-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; }
+
+        .dot { width: 10px; height: 10px; background: #ddd; border-radius: 50%; }
+
+        .dot.active { background: var(--accent); }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div id="step1" class="overlay active">
+
+        <div class="card">
+
+            <h1>HAPPIEST BIRTHDAY RAJAT! 🎂</h1>
+
+            <p class="joke-text">"Why did the AI cross the road? Because it was optimized to find the global minimum of the distance function!"</p>
+
+            <p>"You’re the only node I never disconnect from.” 💛. Let's play!</p>
+
+            <button class="btn" onclick="nextStep(2)">BOOT SYSTEM 🚀</button>
+
+        </div>
+
+    </div>
+
+
+
+    <div id="step2" class="overlay">
+
+        <div class="card" id="rage-card">
+
+            <h2>STRESS RELIEF ⌨️</h2>
+
+            <p class="joke-text">"I asked an AI for a joke about COBOL... it said 'You're looking at it.'"</p>
+
+            <p>MASH KEYS to vent that production stress!</p>
+
+            <div style="width: 100%; height: 20px; background: #fff; border-radius: 10px; margin: 20px 0;">
+
+                <div id="meter-fill"></div>
+
+            </div>
+
+            <p id="rage-msg">METER: 0%</p>
+
+        </div>
+
+    </div>
+
+
+
+    <div id="step3" class="overlay">
+
+        <div class="card" style="height: 70vh;">
+
+            <h2>BUG SMASH BATTLE 🦟</h2>
+
+            <p>Score: <b id="score">0</b> | Time: <b id="timer">20</b></p>
+
+            <div id="bug-field" style="height: 100%; position: relative; overflow: hidden; background: rgba(255,255,255,0.3); border-radius: 20px;"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <div id="step4" class="overlay">
+
+        <div class="card">
+
+            <div class="progress-dots" id="dots"></div>
+
+            <h2 id="q-title">BRAIN.EXE TEST 🧠</h2>
+
+            <p id="q-joke" class="joke-text"></p>
+
+            <div class="code-box" id="code-snippet"></div>
+
+            <div id="q-options"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <div id="step5" class="overlay">
+    <div class="card">
+        <h1 style="font-size: 1.5rem;">DEPLOYING RAJAT_V2026.0...</h1>
+        <div class="code-box" style="font-size: 0.8rem;">
+            > Initializing Heart.exe... [OK]<br>
+            > Optimizing Brain_Logic... [OK]<br>
+            > Cleaning Coffee_Buffer... [OK]<br>
+            > Status: 10x Developer Unlocked.
+        </div>
+        <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+            <div style="text-align: center;">
+                <div style="color: var(--accent); font-weight: bold;">∞</div>
+                <div style="font-size: 0.7rem;">IQ</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="color: var(--accent); font-weight: bold;">0</div>
+                <div style="font-size: 0.7rem;">BUGS</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="color: var(--accent); font-weight: bold;">100%</div>
+                <div style="font-size: 0.7rem;">LEGEND</div>
+            </div>
+        </div>
+        <button class="btn" style="margin-top: 25px;" onclick="nextStep(6)">ACCESS ENCRYPTED WISH 📂</button>
+    </div>
+</div>
+
+<div id="step6" class="overlay">
+    <div class="card" style="background: #fffbe6; transform: rotate(-1deg);">
+        <h3>To My Favorite Buddy, Rajat 💌</h3>
+        <p>You’re a great vibe match and the best giggling partner I could ask for. Thanks for the laughs, the comfort, and always matching my energy while keeping things real. You’re truly one of a kind — and yes, my only male best friend. Once again, HAPPIEST BIRTHDAY,RAJYYAA💛✨</p>
+        <p style="text-align: right;"><b>- Always your buddy ✨</b></p>
+        <button class="btn" onclick="nextStep(7)">Final Command</button>
+    </div>
+</div>
+
+<div id="step7" class="overlay" style="background: #000; color: #fff;">
+    <h1 style="font-size: 6rem; margin: 0;">😴</h1>
+    <h1 style="color: var(--accent);">HAPPY BIRTHDAY RAJAT!</h1>
+    <p>System update complete. All modules operational.</p>
+    <h2 style="color: #55efc4;">NOW GO AND SLEEP NOW 😆</h2>
+    <p class="joke-text">"An AI walks into a bar... the bartender says 'We don't serve your kind here.' The AI says 'Actually, based on my data, you serve anyone with a wallet.'"</p>
+    <button class="btn" style="background: transparent; border: 2px solid white;" onclick="rebootSystem()">REBOOT SYSTEM 🔄</button>
+</div>
+
+<script>
+    function nextStep(n) {
+        document.querySelectorAll('.overlay').forEach(o => o.classList.remove('active'));
+        document.getElementById('step'+n).classList.add('active');
+        if(n === 2) initRage();
+        if(n === 3) initBugs();
+        if(n === 4) startLogicRound();
+        if(n === 5) {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        }
+    }
+
+    // Function to Reset the Game
+    function rebootSystem() {
+        // Reset Logic Game variables
+        currentQ = 0;
+        // Go back to step 1
+        nextStep(1);
+        // Refresh page if you want a hard reset of all event listeners/states
+        // location.reload(); 
+    }
+
+    // --- RAGE GAME ---
+    function initRage() {
+        let r = 0;
+        const bar = document.getElementById('meter-fill');
+        const handler = (e) => {
+            r += 4; 
+            bar.style.width = r + '%';
+            document.getElementById('rage-msg').innerText = `METER: ${r}%`;
+            if(r >= 100) {
+                window.removeEventListener('keydown', handler);
+                document.getElementById('rage-msg').innerHTML = "<b>Calm down, it’s just one semicolon. 😅</b>";
+                setTimeout(() => nextStep(3), 1500);
+            }
+        };
+        window.addEventListener('keydown', handler);
+    }
+
+    // --- BUG SMASH ---
+    function initBugs() {
+        let s = 0; let t = 20;
+        document.getElementById('score').innerText = '0';
+        const timer = setInterval(() => {
+            t--; 
+            document.getElementById('timer').innerText = t;
+            if(t <= 0) { 
+                clearInterval(timer); 
+                nextStep(4); 
+            }
+        }, 1000);
+
+        function spawn() {
+            if(t <= 0) return;
+            const b = document.createElement('div');
+            b.className = 'bug'; b.innerHTML = '🐛';
+            b.style.left = Math.random() * 85 + '%';
+            b.style.top = Math.random() * 85 + '%';
+            b.onclick = () => { s++; document.getElementById('score').innerText = s; b.remove(); };
+            document.getElementById('bug-field').appendChild(b);
+            setTimeout(() => { if(b.parentNode) b.remove(); }, 1200);
+            setTimeout(spawn, 500);
+        }
+        spawn();
+    }
+
+    // --- LOGIC ROUND ---
+    const questions = [
+        { c: "console.log(0.1 + 0.2 === 0.3)", o: ["true", "false", "undefined"], a: "false", j: "Math is hard for JS..." },
+        { c: "print('ba' + + 'a' + 'a')", o: ["baaa", "banana", "Error"], a: "banana", j: "Minions love this code." },
+        { c: "int x = 10; \nint y = x++ + ++x;", o: ["20", "22", "21"], a: "22", j: "Incrementing your age like..." },
+        { c: "Boolean([])", o: ["true", "false", "Error"], a: "true", j: "Logic? Never heard of her." },
+        { c: "typeof NaN", o: ["number", "NaN", "object"], a: "number", j: "Not a Number is a Number. Peak AI." }
+    ];
+
+    let currentQ = 0;
+    function startLogicRound() {
+        const dots = document.getElementById('dots');
+        dots.innerHTML = questions.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('');
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const q = questions[currentQ];
+        document.getElementById('q-joke').innerText = q.j;
+        document.getElementById('code-snippet').innerText = q.c;
+        const optDiv = document.getElementById('q-options');
+        optDiv.innerHTML = '';
+        
+        q.o.forEach(opt => {
+            const b = document.createElement('button');
+            b.className = 'btn'; b.innerText = opt;
+            b.onclick = () => {
+                if(opt === q.a) confetti({particleCount: 20});
+                currentQ++;
+                const dots = document.getElementsByClassName('dot');
+                if(currentQ < questions.length) {
+                    dots[currentQ].classList.add('active');
+                    showQuestion();
+                } else {
+                    nextStep(5);
+                }
+            };
+            optDiv.appendChild(b);
+        });
+    }
+</script>
